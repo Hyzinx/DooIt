@@ -1,3 +1,4 @@
+import 'package:dooit/themes/text_styling.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -10,16 +11,32 @@ class Splash extends StatelessWidget {
       body: Expanded(
         child: Container(
           color: Colors.black,
-          child: Center(
+          child: Container(
+            padding: EdgeInsets.symmetric(vertical: 60),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                Expanded(child: SizedBox()),
                 Image.asset("assets/img/splash.png"),
-                SizedBox(height: 40),
-                Text(
-                  "Dooit",
-                  style: GoogleFonts.inter(color: Colors.white, fontSize: 50),
+                SizedBox(height: 28),
+                StyleSplashTitle("Dooit"),
+                SizedBox(height: 28),
+                StyleSplashPragraph("Write what you need to do. Everyday."),
+                Expanded(child: SizedBox()),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16, horizontal: 64),
+                    child: Text(
+                      "Continue",
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
