@@ -1,6 +1,5 @@
 import 'package:dooit/themes/text_styling.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class Splash extends StatelessWidget {
   const Splash({super.key});
