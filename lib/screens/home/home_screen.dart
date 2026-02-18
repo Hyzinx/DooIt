@@ -1,11 +1,13 @@
+import 'package:dooit/screens/home/all_screen/all_list.dart';
+import 'package:dooit/screens/home/pinned/pinned.dart';
 import 'package:dooit/themes/style_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class Button {
   String text;
-  bool isActive;
-  Button(this.text, this.isActive);
+  Widget screen;
+  Button(this.text, this.screen);
 }
 
 class HomeScreen extends StatefulWidget {
@@ -15,15 +17,25 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-List<Button> listButton = [Button("Pinned", false), Button("All List", true)];
+List<Button> listButton = [
+  Button("All List", AllList()),
+  Button("Pinned", Pinned()),
+];
 
 class _HomeScreenState extends State<HomeScreen> {
   Button selectedButton = listButton[0];
-  void changeSelectedButton() {
+  late Widget selectedScreen;
+
+  @override
+  void initState() {
+    selectedScreen = selectedButton.screen;
+    super.initState();
+  }
+
+  void changeSelectedButton(Button btn) {
     setState(() {
-      for (Button bt in listButton) {
-        bt.isActive=!bt.isActive;
-      }
+      selectedButton = btn;
+      selectedScreen = selectedButton.screen;
     });
   }
 
@@ -57,20 +69,21 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Column(
         children: [
           Container(
-            padding: EdgeInsets.symmetric(vertical: 20),
+            padding: EdgeInsets.only(top: 20,bottom: 113),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 ...listButton.map(
                   (bt) => StyleButton(
-                    text: bt.text,
                     onTap: changeSelectedButton,
-                    isSelected: bt.isActive,
+                    button: bt,
+                    isSelected: bt == selectedButton,
                   ),
                 ),
               ],
             ),
           ),
+          selectedScreen
         ],
       ),
     );

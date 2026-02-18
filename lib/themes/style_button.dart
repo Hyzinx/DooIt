@@ -1,3 +1,4 @@
+import 'package:dooit/screens/home/home_screen.dart';
 import 'package:dooit/themes/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -5,19 +6,21 @@ import 'package:google_fonts/google_fonts.dart';
 class StyleButton extends StatelessWidget {
   const StyleButton({
     super.key,
-    required this.text,
+    required this.button,
     required this.onTap,
     required this.isSelected,
   });
 
-  final Function() onTap;
+  final Function(Button) onTap;
+  final Button button;
   final bool isSelected;
-  final String text;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        onTap(button);
+      },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 60, vertical: 14),
         decoration: BoxDecoration(
@@ -27,7 +30,7 @@ class StyleButton extends StatelessWidget {
               : AppColor.secondaryColor,
         ),
         child: Text(
-          text,
+          button.text,
           style: GoogleFonts.inter(
             fontSize: 15,
             fontWeight: FontWeight.bold,
